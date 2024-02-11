@@ -1,0 +1,11 @@
+ ${AnsiColor.BRIGHT_YELLOW}${AnsiBackground.BLACK}
+ ___    _                      _         _
+(  _`\ ( )_                   ( )       (_ )
+| (_(_)| ,_)   _ _   ___     _| |   _ _  | |    _     ___     __
+`\__ \ | |   /'_` )/' _ `\ /'_` | /'_` ) | |  /'_`\ /' _ `\ /'__`\
+( )_) || |_ ( (_| || ( ) |( (_| |( (_| | | | ( (_) )| ( ) |(  ___/
+`\____)`\__)`\__,_)(_) (_)`\__,_)`\__,_)(___)`\___/'(_) (_)`\____)
+
+
+Spring Boot ${application.title} ${spring-boot.version}${AnsiBackground.DEFAULT}${AnsiColor.DEFAULT}
+

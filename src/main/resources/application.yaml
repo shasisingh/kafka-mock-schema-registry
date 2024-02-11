@@ -1,0 +1,39 @@
+register:
+  schema_registry:
+    port: "10002"
+    http_port: "10003"
+  kafka_broker_server:
+    port: "10004"
+
+server:
+  port: 10000
+  shutdown: graceful
+management:
+  server:
+    port: 10001
+    ssl:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  application:
+    name: "rdc-kafka-standalone"
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  level:
+    org:
+      springframework:
+        web: info
+        kafka: info
+    io.confluent.kafka.schemaregistry.client.rest.RestService: info
+  logback:
+    rollingpolicy:
+      max-index: "10"
+      max-file-size: "10MB"
+  file:
+    path: ${user.dir}/logs/
