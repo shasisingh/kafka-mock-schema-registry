@@ -104,6 +104,7 @@
     </dependencies>
 
     <build>
+        <finalName>rdc-kafka-standalone</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -125,9 +126,6 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
-                        <configuration>
-                            <finalName>rdc-kafka-standalone</finalName>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
