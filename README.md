@@ -81,6 +81,32 @@ The following are the default schema names that are registered when the applicat
 - `rabo-ota-local-payments-sfcsubscriptionexecution`
 - `rabo-ota-local-rdc-powerofattorneyonlineregistration-deleteaccount`
 
+## Docker Build
+
+To build a Docker image with a specific version number from the project root, run the following commands:
+
+1. Run Maven clean install:
+```
+mvn clean install
+```
+
+2. Build the Docker image:
+```
+docker build -t kafka-standalone:v1.0 .
+```
+
+This command builds a Docker image named `kafka-standalone` with version `v1.0` from the project's root directory.
+
+### Docker Run
+
+To run the Docker image with the specified ports mapped, use the following command:
+
+```
+docker run -p 10000:10000 -p 10003:10003 -p 10004:10004 --name kafka-standalone -it kafka-standalone:v1.0
+```
+
+This command runs the Docker image named `kafka-standalone` with version `v1.0` and maps ports `10000`, `10003`, and `10004` to the corresponding ports inside the container.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
