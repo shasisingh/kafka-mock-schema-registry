@@ -1,12 +1,13 @@
 FROM eclipse-temurin:17.0.10_7-jre-jammy AS builder
 LABEL org.opencontainers.image.authors="RDC"
-WORKDIR apps
+WORKDIR standalone-app
 
-ARG JAR_FILE=target/kafka-standalone.jar
-COPY $JAR_FILE kafka-standalone.jar
-ADD target/kafka-standalone.jar kafka-standalone.jar
+ARG JAR_FILE_LOCATION=target/rdc-kafka-standalone.jar
 
-RUN java -Djarmode=layertools -jar kafka-standalone.jar extract
+COPY $JAR_FILE_LOCATION rdc-kafka-standalone.jar
+ADD  $JAR_FILE_LOCATION rdc-kafka-standalone.jar
+
+RUN java -Djarmode=layertools -jar rdc-kafka-standalone.jar extract
 
 FROM eclipse-temurin:17.0.10_7-jre-jammy
 
@@ -14,17 +15,17 @@ EXPOSE 10000
 EXPOSE 10004
 EXPOSE 10002
 
-WORKDIR apps
+WORKDIR standalone-app
 
-COPY --from=builder apps/dependencies/ ./
+COPY --from=builder standalone-app/dependencies/ ./
 RUN true
-COPY --from=builder apps/snapshot-dependencies/ ./
+COPY --from=builder standalone-app/snapshot-dependencies/ ./
 RUN true
-COPY --from=builder apps/spring-boot-loader/ ./
+COPY --from=builder standalone-app/spring-boot-loader/ ./
 RUN true
-COPY --from=builder apps/application/ ./
+COPY --from=builder standalone-app/application/ ./
 
-VOLUME ["/tmp","/keystores","/logs","/data"]
+VOLUME ["/tmp","/logs","/data"]
 
 ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:+UseStringDeduplication"
 ENTRYPOINT ["java" , "org.springframework.boot.loader.launch.JarLauncher"]

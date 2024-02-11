@@ -100,6 +100,7 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka-test</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -125,12 +126,32 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>kafka-standalone</finalName>
+                            <finalName>rdc-kafka-standalone</finalName>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
+    <scm>
+        <developerConnection>git@ssh.dev.azure.com:v3/raboweb/Rabo%20Direct%20Connect/rdc-kafka-standalone</developerConnection>
+        <url>https://dev.azure.com/raboweb/Rabo%20Direct%20Connect/_git/rdc-kafka-standalone</url>
+        <tag>HEAD</tag>
+    </scm>
+
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>IP Releases</name>
+            <url>https://nexus3.rabobank.nl/repository/payments-savings-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot</id>
+            <name>IP Snapshots</name>
+            <url>https://nexus3.rabobank.nl/repository/payments-savings-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
