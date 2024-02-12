@@ -20,28 +20,41 @@ variables:
     value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
 stages:
-  #maven stage
-  - ${{ if eq(variables.isMain, false) }}:
-      - template: maven-build-others-branch.yml
+  - stage: Build
+    displayName: Build
+    jobs:
+      - job: BuildOthers
+        displayName: Build Other branch
+        timeoutInMinutes: 15
+        condition: and(succeeded(), eq(variables.isMain, false))
+        pool:
+          name: Rabo-Linux-Production
+        steps:
+          - template: templates/maven-build-others-branch.yml
 
-  - ${{ if eq(variables.isMain, true) }}:
-      - template: /pipeline/continuous-integration.yml@yapl
-        parameters:
-          mavenSettingsFile: 'settings.xml'
-          jacocoVersion: '0.8.11'
-          mavenGoals: '-Dnexus.username=$(nexus.username) -Dnexus.password=$(nexus.password)'
-          javaVersion: '1.17'
-          applicationName: 'rdc-kafka-standalone'
-          sonarEnabled: false
-          fortify:
-            enabled: false
-          nexusIq:
-            enabled: false
-          featureTests:
-            enabled: false
+      - job: BuildMaster
+        displayName: Build Main
+        timeoutInMinutes: 15
+        condition: and(succeeded(), eq(variables.isMain, true))
+        pool:
+          name: Rabo-Linux-Production
+        steps:
+          - template: /pipeline/continuous-integration.yml@yapl
+            parameters:
+              mavenSettingsFile: 'settings.xml'
+              jacocoVersion: '0.8.11'
+              mavenGoals: '-Dnexus.username=$(nexus.username) -Dnexus.password=$(nexus.password)'
+              javaVersion: '1.17'
+              applicationName: 'rdc-kafka-standalone'
+              sonarEnabled: false
+              fortify:
+                enabled: false
+              nexusIq:
+                enabled: false
+              featureTests:
+                enabled: false
 
-  # docker stage
-  - stage:
+  - stage: Docker
     jobs:
       - job: Docker_push
         condition: and(succeeded(), eq(variables.isMain, true))
