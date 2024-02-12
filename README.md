@@ -11,6 +11,15 @@ The Schema Registry API is used to register schemas for topics within the system
 
 ## Usage
 
+To include the required dependency in your Maven project, add the following lines to your `pom.xml` file:
+
+```xml
+<dependency>
+    <groupId>nl.rabobank.beb</groupId>
+    <artifactId>business-event-bus-schema</artifactId>
+    <version>version your other app using</version>
+</dependency>
+
 ### Register Schema
 
 To register a schema, make a POST request to the following endpoint:
