@@ -19,6 +19,7 @@ To include the required dependency in your Maven project, add the following line
     <artifactId>business-event-bus-schema</artifactId>
     <version>version your other app using</version>
 </dependency>
+```
 
 ### Register Schema
 
