@@ -1,0 +1,58 @@
+name: $(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+pool:
+  name: Rabo-Linux-Production
+
+trigger:
+  branches:
+    include:
+      - main
+
+resources:
+  repositories:
+    - repository: yapl
+      type: git
+      name: Maui/yapl
+
+variables:
+  - group: nexus credentials
+
+stages:
+  #maven stage
+  - template: /pipeline/continuous-integration.yml@yapl
+    parameters:
+      mavenSettingsFile: 'settings.xml'
+      jacocoVersion: '0.8.11'
+      mavenGoals: '-Dnexus.username=$(nexus.username) -Dnexus.password=$(nexus.password)'
+      javaVersion: '1.17'
+      applicationName: 'rdc-kafka-standalone'
+      sonarEnabled: false
+      fortify:
+        enabled: false
+      nexusIq:
+        enabled: false
+      featureTests:
+        enabled: false
+
+  # docker stage
+  - stage:
+    jobs:
+      - job: Docker_push
+        displayName: Build and Push Axual Docker Image
+        steps:
+          - task: DownloadSecureFile@1
+            name: settingsfile
+            displayName: Download settings file
+            inputs:
+              secureFile: 7c399f5c-a5f4-4f17-a17c-1e093690d88e
+              retryCount: 2
+          - task: Maven@3
+            displayName: Code Build, Quality check
+            inputs:
+              goals: install -DskipTests
+              options: -B -e --settings $(settingsfile.secureFilePath) -Dnexus.username=$(nexus.username) -Dnexus.password=$(nexus.password)
+              jdkVersion: 17
+              mavenPomFile: 'pom.xml'
+
+          - template: build-and-push-ecr-image.yml
+            parameters:
+              repositoryName: 'rdc-kafka-standalone'
