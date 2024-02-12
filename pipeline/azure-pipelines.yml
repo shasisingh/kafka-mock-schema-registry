@@ -21,24 +21,24 @@ variables:
 
 stages:
   #maven stage
-  - ${{ eq(variables.isMain, false) }}:
-  - template: maven-build-others-branch.yml
+  - ${{ if eq(variables.isMain, false) }}:
+      - template: maven-build-others-branch.yml
 
   - ${{ if eq(variables.isMain, true) }}:
-  - template: /pipeline/continuous-integration.yml@yapl
-    parameters:
-      mavenSettingsFile: 'settings.xml'
-      jacocoVersion: '0.8.11'
-      mavenGoals: '-Dnexus.username=$(nexus.username) -Dnexus.password=$(nexus.password)'
-      javaVersion: '1.17'
-      applicationName: 'rdc-kafka-standalone'
-      sonarEnabled: false
-      fortify:
-        enabled: false
-      nexusIq:
-        enabled: false
-      featureTests:
-        enabled: false
+      - template: /pipeline/continuous-integration.yml@yapl
+        parameters:
+          mavenSettingsFile: 'settings.xml'
+          jacocoVersion: '0.8.11'
+          mavenGoals: '-Dnexus.username=$(nexus.username) -Dnexus.password=$(nexus.password)'
+          javaVersion: '1.17'
+          applicationName: 'rdc-kafka-standalone'
+          sonarEnabled: false
+          fortify:
+            enabled: false
+          nexusIq:
+            enabled: false
+          featureTests:
+            enabled: false
 
   # docker stage
   - stage:
@@ -62,6 +62,6 @@ stages:
               jdkVersion: 17
               mavenPomFile: 'pom.xml'
 
-          - template: build-and-push-ecr-image.yml
+          - template: templates/build-and-push-ecr-image.yml
             parameters:
               repositoryName: 'rdc-kafka-standalone'
