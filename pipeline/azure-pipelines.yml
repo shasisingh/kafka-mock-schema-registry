@@ -30,7 +30,15 @@ stages:
         pool:
           name: Rabo-Linux-Production
         steps:
-          - template: templates/maven-build-others-branch.yml
+          - template: /pipeline/build-other-branch.yml@yapl
+            parameters:
+              jacocoVersion: '0.8.11'
+              mavenSettingsFile: 'settings.xml'
+              javaVersion: '1.17'
+              applicationName: 'rdc-axual-standalone'
+              featureTests:
+                enabled: false
+              sonarEnabled: false
 
       - job: BuildMaster
         displayName: Build Main
