@@ -53,6 +53,6 @@ stages:
               jdkVersion: 17
               mavenPomFile: 'pom.xml'
 
-          - template: build-and-push-ecr-image.yml
+          - template: templates/build-and-push-ecr-image.yml
             parameters:
               repositoryName: 'rdc-kafka-standalone'
