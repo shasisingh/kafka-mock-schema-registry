@@ -21,6 +21,10 @@ variables:
 
 stages:
   #maven stage
+  - ${{ eq(variables.isMain, false) }}:
+  - template: maven-build-others-branch.yml
+
+  - ${{ if eq(variables.isMain, true) }}:
   - template: /pipeline/continuous-integration.yml@yapl
     parameters:
       mavenSettingsFile: 'settings.xml'
