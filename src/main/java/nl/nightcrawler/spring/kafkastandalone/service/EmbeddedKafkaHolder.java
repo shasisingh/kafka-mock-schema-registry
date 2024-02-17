@@ -1,4 +1,4 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.service;
+package nl.nightcrawler.spring.kafkastandalone.service;
 
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +20,10 @@ public class EmbeddedKafkaHolder {
 
     @Builder.Default
     private final String[] defaultTopic = {
-            "rabo-ota-local-payments-multibankaccountupdated",
-            "rabo-ota-local-payments-sfcsubscriptiondelete",
-            "rabo-ota-local-payments-sfcsubscriptionchange",
-            "rabo-ota-local-payments-sfcsubscriptionexecution",
-            "rabo-ota-local-rdc-powerofattorneyonlineregistration-deleteaccount"
+            "ota-exp-topic1",
+            "ota-exp-topic2",
+            "ota-exp-topic3",
+            "ota-exp-topic4"
     };
 
     private EmbeddedKafkaBroker embeddedKafka;
@@ -43,12 +42,12 @@ public class EmbeddedKafkaHolder {
             Map.ofEntries(
                     Map.entry("auto.create.topics.enable", "false"),
                     Map.entry("migration.enabled", "false"),
-                    Map.entry("auto.leader.rebalance.enable", "false"),
+                    Map.entry("auto.leader.rebalance.enable", "true"),
                     Map.entry("unclean.leader.election.enable", "false"),
                     Map.entry("offsets.retention.minutes", "5"),
                     Map.entry("transaction.state.log.replication.factor", "5"),
                     Map.entry("transaction.state.log.min.isr", "1"),
-                    Map.entry("controlled.shutdown.enable", "false"));
+                    Map.entry("controlled.shutdown.enable", "true"));
 
     public EmbeddedKafkaHolder start() {
         if (this.canUseDefaultTopic) {

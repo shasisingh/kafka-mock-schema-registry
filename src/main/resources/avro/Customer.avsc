@@ -1,0 +1,19 @@
+{
+  "namespace": "nl.nightcrawler.spring.kafkastandalone.avro.model",
+  "type": "record",
+  "name": "Customer",
+  "fields": [
+    {
+      "name": "customerName",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": "string"
+    },
+    {
+      "name": "pinCode",
+      "type": "int"
+    }
+  ]
+}

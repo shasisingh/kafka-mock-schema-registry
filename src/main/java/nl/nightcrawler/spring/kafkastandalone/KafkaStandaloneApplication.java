@@ -1,11 +1,9 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone;
+package nl.nightcrawler.spring.kafkastandalone;
 
 import org.springframework.boot.Banner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.core.metrics.ApplicationStartup;
 
 @SpringBootApplication
 public class KafkaStandaloneApplication {
@@ -16,6 +14,7 @@ public class KafkaStandaloneApplication {
                 .web(WebApplicationType.SERVLET)
                 .headless(true)
                 .registerShutdownHook(true)
+                .properties()
                 .run(args);
     }
 

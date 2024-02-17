@@ -1,0 +1,11 @@
+{
+  "namespace": "nl.nightcrawler.spring.kafkastandalone.avro.model",
+  "type": "record",
+  "name": "UUID",
+  "fields": [
+    {
+      "name": "uniqueId",
+      "type": "string"
+    }
+  ]
+}

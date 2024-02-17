@@ -1,19 +1,18 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.service;
+package nl.nightcrawler.spring.kafkastandalone.service;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.http.HttpHeaders;
 import io.confluent.kafka.schemaregistry.client.rest.entities.SchemaString;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.model.Schema;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.model.SchemaDefinition;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.utils.AvroHelper;
+import nl.nightcrawler.spring.kafkastandalone.utils.AvroHelper;
+import nl.nightcrawler.spring.kafkastandalone.model.Schema;
+import nl.nightcrawler.spring.kafkastandalone.model.SchemaDefinition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -167,11 +166,7 @@ public final class MockSchemaRegistry {
 
     private static List<Schema> schemas() {
         return List.of(
-                new Schema("nl.rabobank.beb.general.Random", "nl.rabobank.beb.payments.sfc.SfcSubscriptionExecutionEvent", "rabo-ota-local-payments-sfcsubscriptionexecution"),
-                new Schema("nl.rabobank.beb.general.Random", "nl.rabobank.beb.payments.sfc.SfcSubscriptionChangeEvent", "rabo-ota-local-payments-sfcsubscriptionchange"),
-                new Schema("nl.rabobank.beb.general.Random", "nl.rabobank.beb.payments.sfc.SfcSubscriptionDeleteEvent", "rabo-ota-local-payments-sfcsubscriptiondelete"),
-                new Schema("nl.rabobank.beb.general.UUID", "nl.rabobank.distribution.powerofattorney.DeletePowerOfAttorneyCompletedEvent", "rabo-ota-local-rdc-powerofattorneyonlineregistration-deleteaccount"),
-                new Schema("nl.rabobank.beb.general.Random", "nl.rabobank.beb.payments.mbi.MultibankAccountUpdatedEvent", "rabo-ota-local-payments-multibankaccountupdated")
+                new Schema("nl.nightcrawler.spring.kafkastandalone.avro.model.UUID", "nl.nightcrawler.spring.kafkastandalone.avro.model.Customer", "ota-exp-topic1")
         );
     }
 

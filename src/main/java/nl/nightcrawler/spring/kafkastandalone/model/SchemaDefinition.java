@@ -1,4 +1,4 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.model;
+package nl.nightcrawler.spring.kafkastandalone.model;
 
 
 import lombok.Builder;

@@ -19,7 +19,7 @@ management:
         include: "*"
 spring:
   application:
-    name: "rdc-kafka-standalone"
+    name: "kafka-standalone"
   output:
     ansi:
       enabled: always

@@ -1,13 +1,13 @@
 FROM eclipse-temurin:17.0.10_7-jre-jammy AS builder
-LABEL org.opencontainers.image.authors="RDC"
+LABEL org.opencontainers.image.authors="Shasi Singh"
 WORKDIR standalone-app
 
-ARG JAR_FILE_LOCATION=target/rdc-kafka-standalone.jar
+ARG JAR_FILE_LOCATION=target/kafka-standalone.jar
 
-COPY $JAR_FILE_LOCATION rdc-kafka-standalone.jar
-ADD  $JAR_FILE_LOCATION rdc-kafka-standalone.jar
+COPY $JAR_FILE_LOCATION kafka-standalone.jar
+ADD  $JAR_FILE_LOCATION kafka-standalone.jar
 
-RUN java -Djarmode=layertools -jar rdc-kafka-standalone.jar extract
+RUN java -Djarmode=layertools -jar kafka-standalone.jar extract
 
 FROM eclipse-temurin:17.0.10_7-jre-jammy
 

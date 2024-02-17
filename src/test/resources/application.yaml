@@ -1,16 +1,16 @@
 register:
   schema_registry:
-    port: "0"
-    http_port: "0"
+    port: "20001"
+    http_port: "20002"
   kafka_broker_server:
-    port: "0"
+    port: "20000"
 
 server:
-  port: 0
+  port: 19000
   shutdown: graceful
 management:
   server:
-    port: 0
+    port: 19002
     ssl:
       enabled: false
   endpoints:
@@ -19,7 +19,7 @@ management:
         include: "*"
 spring:
   application:
-    name: "rdc-kafka-standalone"
+    name: "kafka-standalone"
   output:
     ansi:
       enabled: always

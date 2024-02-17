@@ -1,9 +1,9 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.api;
+package nl.nightcrawler.spring.kafkastandalone.api;
 
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.service.MockBroker;
+import nl.nightcrawler.spring.kafkastandalone.service.MockBroker;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

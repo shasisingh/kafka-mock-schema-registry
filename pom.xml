@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>nl.rabobank.gict.betalen.hhv.acdc</groupId>
+    <groupId>nl.nightcrawler.spring</groupId>
     <artifactId>kafka-standalone</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>kafka-standalone</name>
@@ -69,12 +69,6 @@
         </dependency>
 
         <dependency>
-            <groupId>nl.rabobank.beb</groupId>
-            <artifactId>business-event-bus-schema</artifactId>
-            <version>2.1.178</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-compiler</artifactId>
             <version>${avro.version}</version>
@@ -104,13 +98,31 @@
     </dependencies>
 
     <build>
-        <finalName>rdc-kafka-standalone</finalName>
+        <finalName>kafka-standalone</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.11.2</version>
+                <executions>
+                    <execution>
+                        <id>schemas</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/resources/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.KafkaStandaloneApplication</mainClass>
+                    <mainClass>nl.nightcrawler.spring.kafkastandalone.KafkaStandaloneApplication</mainClass>
                     <layout>JAR</layout>
                     <excludes>
                         <exclude>
@@ -132,24 +144,5 @@
         </plugins>
     </build>
 
-    <scm>
-        <developerConnection>git@ssh.dev.azure.com:v3/raboweb/Rabo%20Direct%20Connect/rdc-kafka-standalone</developerConnection>
-        <url>https://dev.azure.com/raboweb/Rabo%20Direct%20Connect/_git/rdc-kafka-standalone</url>
-        <tag>HEAD</tag>
-    </scm>
-
-
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>IP Releases</name>
-            <url>https://nexus3.rabobank.nl/repository/payments-savings-release</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshot</id>
-            <name>IP Snapshots</name>
-            <url>https://nexus3.rabobank.nl/repository/payments-savings-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
 </project>

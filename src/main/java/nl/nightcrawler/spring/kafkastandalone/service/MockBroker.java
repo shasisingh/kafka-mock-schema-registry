@@ -1,4 +1,4 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.service;
+package nl.nightcrawler.spring.kafkastandalone.service;
 
 
 import jakarta.annotation.PostConstruct;

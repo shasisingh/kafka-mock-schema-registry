@@ -1,4 +1,4 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.utils;
+package nl.nightcrawler.spring.kafkastandalone.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

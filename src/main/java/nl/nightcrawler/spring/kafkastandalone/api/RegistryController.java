@@ -1,12 +1,12 @@
-package nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.api;
+package nl.nightcrawler.spring.kafkastandalone.api;
 
 import com.github.tomakehurst.wiremock.stubbing.StubMapping;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.model.Schema;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.model.SchemaDefinition;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.service.MockSchemaRegistry;
-import nl.rabobank.gict.betalen.hhv.acdc.kafkastandalone.utils.AvroHelper;
+import nl.nightcrawler.spring.kafkastandalone.service.MockSchemaRegistry;
+import nl.nightcrawler.spring.kafkastandalone.utils.AvroHelper;
+import nl.nightcrawler.spring.kafkastandalone.model.Schema;
+import nl.nightcrawler.spring.kafkastandalone.model.SchemaDefinition;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

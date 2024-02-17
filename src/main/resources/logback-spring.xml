@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <property name="LOG_FILE" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/rdc-kafka-standalone.${nodename:-local}.log}"/>
+    <property name="LOG_FILE" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/kafka-standalone.${nodename:-local}.log}"/>
     <springProperty scope="context" name="MAX_INDEX" source="logging.logback.rollingpolicy.max-index" defaultValue="10"/>
     <springProperty scope="context" name="MAX_FILE_SIZE" source="logging.logback.rollingpolicy.max-file-size" defaultValue="10MB"/>
     <appender name="FIX_WINDOW_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
