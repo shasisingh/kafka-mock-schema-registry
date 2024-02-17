@@ -15,9 +15,7 @@ To include the required dependency in your Maven project, add the following line
 
 ```xml
 <dependency>
-    <groupId>nl.rabobank.beb</groupId>
-    <artifactId>business-event-bus-schema</artifactId>
-    <version>version your other app using</version>
+    <If you have dependency for you avro you can add as maven>
 </dependency>
 ```
 
@@ -41,9 +39,9 @@ Example Request Body:
 
 ```json
 {
-  "key": "nl.rabobank.beb.general.Random",
-  "value": "nl.rabobank.beb.payments.sfc.SfcSubscriptionExecutionEvent",
-  "topicName": "rabo-ota-local-payments-sfcsubscriptionexecution1"
+  "key": "nl.nightcrawler.spring.kafkastandalone.avro.model.UUID",
+  "value": "nl.nightcrawler.spring.kafkastandalone.avro.model.Customer",
+  "topicName": "topic5"
 }
 ```
 
@@ -62,10 +60,10 @@ This endpoint returns a list of mappings between schema keys and values.
 To register a topic, make a POST request to the following endpoint:
 
 ```
-http://127.0.0.1:10000/api/v2/broker-registry/register-topic/topic2
+http://127.0.0.1:10000/api/v2/broker-registry/register-topic/topic9
 ```
 
-This endpoint allows you to register a new topic named `topic2`.
+This endpoint allows you to register a new topic named `topic9`.
 
 ## Other Application Consumption
 
@@ -85,11 +83,7 @@ Make sure the consuming applications are configured to use these ports for commu
 
 The following are the default schema names that are registered when the application starts:
 
-- `rabo-ota-local-payments-multibankaccountupdated`
-- `rabo-ota-local-payments-sfcsubscriptiondelete`
-- `rabo-ota-local-payments-sfcsubscriptionchange`
-- `rabo-ota-local-payments-sfcsubscriptionexecution`
-- `rabo-ota-local-rdc-powerofattorneyonlineregistration-deleteaccount`
+- `ota-exp-topic1`
 
 ## Docker Build
 
