@@ -1,9 +1,9 @@
 
 ---
 
-# Schema Registry API Documentation
+# Mock Schema Registry/Kafka Broker API Documentation
 
-This repository contains documentation for the Schema Registry API.
+This repository contains documentation for the MOCK Schema Registry API and embedded Broker, which can assist you in your Unit/Integration or System tests.
 
 ## Introduction
 
