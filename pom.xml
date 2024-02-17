@@ -23,9 +23,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <sonar.skip>true</sonar.skip>
         <avro.version>1.11.2</avro.version>
-		<wiremock-standalone.version>3.3.1</wiremock-standalone.version>
-		<io.confluent.version>7.5.1</io.confluent.version>
-	</properties>
+        <wiremock-standalone.version>3.3.1</wiremock-standalone.version>
+        <io.confluent.version>7.5.1</io.confluent.version>
+    </properties>
 
     <dependencies>
         <dependency>

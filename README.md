@@ -75,10 +75,10 @@ This endpoint returns a list of mappings between schema keys and values.
 To register a topic, make a POST request to the following endpoint:
 
 ```
-http://127.0.0.1:10000/api/v2/broker-registry/register-topic/topic9
+http://127.0.0.1:10000/api/v2/broker-registry/register-topic/topic5
 ```
 
-This endpoint allows you to register a new topic named `topic9`.
+This endpoint allows you to register a new topic named `topic5`.
 
 ## Other Application Consumption
 
