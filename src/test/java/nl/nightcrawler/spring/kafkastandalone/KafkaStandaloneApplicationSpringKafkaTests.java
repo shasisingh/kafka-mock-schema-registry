@@ -37,11 +37,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Slf4j
-class KafkaStandaloneApplicationTests {
+class KafkaStandaloneApplicationSpringKafkaTests {
 
     private static final String SCHEMA_REGISTRY = "http://localhost:20001";
     private static final String BROKER_URL = "http://localhost:20000";
-    private static final String DEFAULT_TOPIC = "ota-exp-topic1";
+    private static final String DEFAULT_TOPIC = "ota-exp-customer";
 
     private static final BlockingQueue<Customer> event = new LinkedBlockingDeque<>();
 

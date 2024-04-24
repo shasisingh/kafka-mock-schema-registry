@@ -10,9 +10,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.nightcrawler.spring.kafkastandalone.utils.AvroHelper;
 import nl.nightcrawler.spring.kafkastandalone.model.Schema;
 import nl.nightcrawler.spring.kafkastandalone.model.SchemaDefinition;
+import nl.nightcrawler.spring.kafkastandalone.utils.AvroHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -166,7 +166,7 @@ public final class MockSchemaRegistry {
 
     private static List<Schema> schemas() {
         return List.of(
-                new Schema("nl.nightcrawler.spring.kafkastandalone.avro.model.UUID", "nl.nightcrawler.spring.kafkastandalone.avro.model.Customer", "ota-exp-topic1")
+                new Schema("nl.nightcrawler.spring.kafkastandalone.avro.model.UUID", "nl.nightcrawler.spring.kafkastandalone.avro.model.Customer", "ota-exp-customer")
         );
     }
 

@@ -23,7 +23,8 @@ public class EmbeddedKafkaHolder {
             "ota-exp-topic1",
             "ota-exp-topic2",
             "ota-exp-topic3",
-            "ota-exp-topic4"
+            "ota-exp-topic4",
+            "ota-exp-customer"
     };
 
     private EmbeddedKafkaBroker embeddedKafka;
