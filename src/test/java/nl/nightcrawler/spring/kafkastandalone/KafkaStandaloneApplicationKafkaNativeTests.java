@@ -41,47 +41,24 @@ class KafkaStandaloneApplicationKafkaNativeTests {
     private static final String DEFAULT_TOPIC = "ota-exp-customer";
 
 
-    public void consumer(Customer assertValue) {
-        try (Consumer<UUID, Customer> consumer = new KafkaConsumer<>(consumerFactoryWithAvro())) {
-            log.info("Consumer instantiated");
-            consumer.subscribe(Collections.singleton(DEFAULT_TOPIC));
-                log.info("Consuming poll #");
-                ConsumerRecords<UUID, Customer> consumerRecords = consumer.poll(Duration.ofSeconds(2));
-                 assert consumerRecords != null;
-                for (ConsumerRecord<UUID, Customer> record : consumerRecords) {
-                    log.info("Consumed message: topic={}; offset={}; key={}; value={}", record.topic(), record.offset(), record.key().getUniqueId(), record.value());
-                    assert !assertValue.getCustomerName().equals(record.value().getCustomerName());
-                }
-                consumer.commitAsync((offsets, e) -> {
-                    if (e != null)
-                        log.info("Commit failed for offsets {}", offsets, e);
-                    else
-                        log.info("Commit successful for offsets {}", offsets, e);
-                });
-            log.info("Closing the consumer.");
-        }
-        log.info("Consumer closed.");
-    }
-
-
     @Test
     void testProduceAndConsume() {
-        var recordValue= getValue();
+        var recordValue = getValue();
         try (Producer<UUID, Customer> producer = new KafkaProducer<>(producerFactoryWithAvro())) {
             log.info("Producer instantiated successfully.");
             var countDownLatch = new CountDownLatch(1);
             try {
 
-                    final ProducerRecord<UUID, Customer> record = new ProducerRecord<>(DEFAULT_TOPIC, randomKey(), recordValue);
-                    producer.send(record, (metadata, e) -> {
-                        if (e != null) {
-                            log.info("Send failed for record {}", record, e);
-                        } else {
-                            log.info("Successfully produced message to topic {} partition {} offset {}", metadata.topic(), metadata.partition(), metadata.offset());
-                        }
-                        countDownLatch.countDown();
-                    });
-                    boolean s = countDownLatch.await(5, TimeUnit.SECONDS);
+                final ProducerRecord<UUID, Customer> record = new ProducerRecord<>(DEFAULT_TOPIC, randomKey(), recordValue);
+                producer.send(record, (metadata, e) -> {
+                    if (e != null) {
+                        log.info("Send failed for record {}", record, e);
+                    } else {
+                        log.info("Successfully produced message to topic {} partition {} offset {}", metadata.topic(), metadata.partition(), metadata.offset());
+                    }
+                    countDownLatch.countDown();
+                });
+                boolean s = countDownLatch.await(5, TimeUnit.SECONDS);
             } catch (Exception e) {
                 countDownLatch.countDown();
             }
@@ -95,6 +72,28 @@ class KafkaStandaloneApplicationKafkaNativeTests {
 
     private static UUID randomKey() {
         return newBuilder().setUniqueId(java.util.UUID.randomUUID().toString()).build();
+    }
+
+    private void consumer(Customer assertValue) {
+        try (Consumer<UUID, Customer> consumer = new KafkaConsumer<>(consumerFactoryWithAvro())) {
+            log.info("Consumer instantiated");
+            consumer.subscribe(Collections.singleton(DEFAULT_TOPIC));
+            log.info("Consuming poll #");
+            ConsumerRecords<UUID, Customer> consumerRecords = consumer.poll(Duration.ofSeconds(2));
+            assert consumerRecords != null;
+            for (ConsumerRecord<UUID, Customer> record : consumerRecords) {
+                log.info("Consumed message: topic={}; offset={}; key={}; value={}", record.topic(), record.offset(), record.key().getUniqueId(), record.value());
+                assert !assertValue.getCustomerName().equals(record.value().getCustomerName());
+            }
+            consumer.commitAsync((offsets, e) -> {
+                if (e != null)
+                    log.info("Commit failed for offsets {}", offsets, e);
+                else
+                    log.info("Commit successful for offsets {}", offsets, e);
+            });
+            log.info("Closing the consumer.");
+        }
+        log.info("Consumer closed.");
     }
 
 
